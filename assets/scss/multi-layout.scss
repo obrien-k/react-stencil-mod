@@ -5,12 +5,12 @@
   justify-content: space-evenly;
   padding:10px;
   flex-wrap:wrap;
-  min-width:218px;
 }
 #multi-desc .card {
   border:thick double #e5e5e5;
   margin:10px;
-  min-width:218px;
+  flex-wrap: nowrap;
+  display: flex;
 }
 #multi-desc .card-title, .card-body {
   margin:10px;

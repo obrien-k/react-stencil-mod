@@ -41,6 +41,7 @@ export default class Custom extends PageManager {
             name
             sku
             path
+            description
             defaultImage {
               img320px: url(width: 320)
               img640px: url(width: 640)
@@ -86,6 +87,12 @@ export default class Custom extends PageManager {
     function renderSrcset(image) {
       return `${image.img320px} 320w, ${image.img640px} 640w, ${image.img960px} 960w, ${image.img1280px} 1280w`
     }
+
+    // Function to strip HTML from product descriptions, leaving just the text
+    function stripHtml(html){
+      var doc = new DOMParser().parseFromString(html, 'text/html');
+      return doc.body.textContent || "";
+    }
     /*
       Page rendering logic
      */
@@ -99,12 +106,12 @@ export default class Custom extends PageManager {
     function renderProduct(product, addToCartURLFormat) {
       // Render the product into a bootstrap "card"
       return `
-      <div class="card" style="max-width: 33%;">
-        ${product.defaultImage ? `<img loading="lazy" class="card-img-top" style="min-height: 33%; object-fit: contain;" src="${product.defaultImage.img960px}" srcset="${renderSrcset(product.defaultImage)}" alt="${product.defaultImage.altText}">` : ''
+      <div class="card">
+        ${product.defaultImage ? `<img loading="lazy" class="card-img-top" style="min-height: 33%; max-width:320px;object-fit: contain;" src="${product.defaultImage.img960px}" srcset="${renderSrcset(product.defaultImage)}" alt="${product.defaultImage.altText}">` : ''
         }
           <div class="card-body">
             <h5 class="card-title">${product.name} ${renderPrice(product.prices)}</h5>
-                      
+            <p class="card-text">${stripHtml(product.description)}</p>          
             <a href="${addToCartURLFormat}${product.entityId}" class="btn btn-primary">Add to cart</a>
           </div>
         </div>`
