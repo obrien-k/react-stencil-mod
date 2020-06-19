@@ -42,6 +42,9 @@ export default class Custom extends PageManager {
             sku
             path
             description
+            brand {
+              name
+            }
             defaultImage {
               img320px: url(width: 320)
               img640px: url(width: 640)
@@ -54,10 +57,6 @@ export default class Custom extends PageManager {
               value
               currencyCode
               }
-            retailPrice {
-              value
-              currencyCode
-            }
           }
         }
       `}),
@@ -107,19 +106,25 @@ export default class Custom extends PageManager {
       // Render the product into a bootstrap "card"
       return `
       <div class="card">
-        ${product.defaultImage ? `<img loading="lazy" class="card-img-top" style="min-height: 33%; max-width:320px;object-fit: contain;" src="${product.defaultImage.img960px}" srcset="${renderSrcset(product.defaultImage)}" alt="${product.defaultImage.altText}">` : ''
+        ${product.defaultImage ? `<img loading="lazy" class="card-img-top" style="max-width:120px;object-fit: contain;" src="${product.defaultImage.img960px}" srcset="${renderSrcset(product.defaultImage)}" alt="${product.defaultImage.altText}">` : ''
         }
           <div class="card-body">
-            <h5 class="card-title">${product.name} ${renderPrice(product.prices)}</h5>
-            <p class="card-text">${stripHtml(product.description)}</p>          
+            <h5 class="card-title">${product.name}</h5>
+            <p class="card-brand">${product.brand.name}</p>
+            <h6 class="card-price">${renderPrice(product.prices)}</h6>
+        </div> 
+            <div class="card-description">
+            <p class="card-title">Product Description</p>
+            <p class="card-text">${stripHtml(product.description)}</p>      
             <a href="${addToCartURLFormat}${product.entityId}" class="btn btn-primary">Add to cart</a>
-          </div>
+            </div>
+         
         </div>`
       }
     
     function renderPrice(prices) {
       // Render the price component from the supplied prices
-      return `<span class="card-text text-muted">(${prices.retailPrice ? `<del><span class="font-italic">${formatLocalizedPrice(prices.price)}</span></del> ` : ''}${formatLocalizedPrice(prices.price)})</span>`
+      return `<span class="card-price">${formatLocalizedPrice(prices.price)}</span>`
     }
     
 

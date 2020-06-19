@@ -7,14 +7,57 @@
   flex-wrap:wrap;
 }
 #multi-desc .card {
+  padding:30px;
   border:thick double #e5e5e5;
   margin:10px;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   display: flex;
 }
-#multi-desc .card-title, .card-body {
+#multi-desc .card-description {
+  margin-top:55px;
+  flex-wrap: wrap;
+  display: flex;
+  width:100%;
+  height:200px;
+}
+#multi-desc .card-description .card-title {
+  letter-spacing: .01rem;
+  margin-left:0px;
+  font-weight:700;
+}
+#multi-desc .card-body{
+  margin-left:100px;
+}
+#multi-desc .card-price {
+  margin-top:0px;
+  margin-left:5px;
+  padding-top:5px;
+}
+#multi-desc .card-title, .card-price {
+  text-transform:none;
+  font-weight: 700;
+}
+#multi-desc .card-title, .card-body, .card-brand{
   margin:10px;
 }
+
+#multi-desc .card-img-top {
+  margin-top:35px;
+  max-width:100%;
+  max-height:100%;
+  flex-wrap:nowrap;
+  display:flex;
+}
+#multi-desc .card-brand{
+  margin-top:-10px;
+  font-size:.9rem;
+  padding:0;
+}
+
+#multi-desc .card-text {
+  display:block;
+}
+
 #multiButton{
   font-size:20px;
   font-family: "Montserrat", Arial, Helvetica, sans-serif;
