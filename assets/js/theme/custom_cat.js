@@ -106,7 +106,7 @@ export default class Custom extends PageManager {
       // Render the product into a bootstrap "card"
       return `
       <div class="card">
-        ${product.defaultImage ? `<img loading="lazy" class="card-img-top" style="max-width:33%;object-fit: contain;" src="${product.defaultImage.img960px}" srcset="${renderSrcset(product.defaultImage)}" alt="${product.defaultImage.altText}">` : ''
+        ${product.defaultImage ? `<img loading="lazy" class="card-img-top" style="max-width:120px;object-fit: contain;" src="${product.defaultImage.img960px}" srcset="${renderSrcset(product.defaultImage)}" alt="${product.defaultImage.altText}">` : ''
         }
           <div class="card-body">
             <h5 class="card-title">${product.name}</h5>

@@ -1,0 +1,84 @@
+---
+category:
+    shop_by_price: true
+    products:
+        limit: {{theme_settings.categorypage_products_per_page}}
+---
+{{inject "categoryProductsPerPage" theme_settings.categorypage_products_per_page}}
+{{inject "categoryId" category.id}}
+{{~inject 'template' template}}
+{{inject 'token' settings.storefront_api.token}}
+<!-- Declare an empty Array as arr
+    Then iterate over the custom fields for the intended name ('foo' here)
+    Inject into the current context -->
+<script>
+    document.write("JAVASCRIPT");
+    let jsContext = JSON.parse({{jsContext}});
+    let arr = [];
+    {{#forEach category.products}}
+      {{#if id}}
+        {{inject 'productIds' value }}
+        // Now within the iteration, we want to push to the previously created Array
+        arr.push({{value}})
+      {{/if}}
+    {{/forEach}}
+</script>
+<!-- Close out the forEach, but we're not done with this data yet, note the injected 'token' and 'arr'-->
+{{#forEach category.products}}
+{{this}}
+{{/forEach}}
+  <div id="multi-desc"></div>
+{{#partial "head"}}
+    {{#if pagination.category.previous}}
+        <link rel="prev" href="{{pagination.category.previous}}">
+    {{/if}}
+    {{#if pagination.category.next}}
+        <link rel="next" href="{{pagination.category.next}}">
+    {{/if}}
+{{/partial}}
+
+{{#partial "page"}}
+
+{{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+{{#if category.image}}
+    {{> components/common/responsive-img
+        image=category.image
+        fallback_size=theme_settings.zoom_size
+        lazyload=theme_settings.lazyload_mode
+        class="category-header-image"
+    }}
+{{/if}}
+{{#unless theme_settings.hide_category_page_heading }}
+    <h1 class="page-heading">{{category.name}}</h1>
+    {{{region name="category_below_header"}}}
+{{/unless}}
+{{{category.description}}}
+<div class="page">
+    {{#if category.faceted_search_enabled}}
+        <aside class="page-sidebar" id="faceted-search-container">
+            {{> components/category/sidebar}}
+        </aside>
+    {{else if category.subcategories}}
+        <aside class="page-sidebar" id="faceted-search-container">
+            {{> components/category/sidebar}}
+        </aside>
+    {{else if category.shop_by_price}}
+        {{#if theme_settings.shop_by_price_visibility}}
+             <aside class="page-sidebar" id="faceted-search-container">
+                {{> components/category/sidebar}}
+            </aside>
+        {{/if}}
+    {{/if}}
+
+    <main class="page-content" id="product-listing-container">
+        {{#if category.products}}
+            {{> components/category/product-listing}}
+        {{else}}
+            <p>{{lang 'categories.no_products'}}</p>
+        {{/if}}
+        {{{region name="category_below_content"}}}
+    </main>
+</div>
+
+{{/partial}}
+{{> layout/base}}

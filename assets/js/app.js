@@ -53,7 +53,8 @@ const pageClasses = {
 };
 
 const customClasses = {
-    'pages/custom/product/multi-layout': () => import('./theme/custom')
+    'pages/custom/product/multi-layout': () => import('./theme/custom'),
+    'pages/custom/category/multi-layout': () => import('./theme/custom_cat')
 };
 
 /**
