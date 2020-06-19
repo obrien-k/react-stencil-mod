@@ -25,25 +25,5 @@
               {{> components/common/alert-success success}}
           {{/if}}
       {{/each}}
-  <div id="multi-desc"></div>
-      <section class="productView-details">
-        
-          <div class="productView-product">
-
-              {{{region name="product_below_price"}}}
-              {{product.detail_messages}}
-              
-              <div class="container" > <!-- This is different than the default product-view template, helps with spacing -->
-                <div class="tabs-contents" > <div role="tabpanel" aria-hidden="false" class="tab-content has-jsContent is-active">{{> components/custom/multi-button}}  <!-- Pull in our custom button component -->
-                  <!-- Set up a div with a unique id to insert our product data + template into -->
-                </div>
-              </div>
-          </div>
-          
-        </section>
-      </section>
-      <article class="productView-description"{{#if schema}} itemprop="description"{{/if}}></article>
-      
-    </div>
-    
-  </div>
+  <div id="multi-desc"></div>   
+</div>
