@@ -18,7 +18,7 @@ export default class Custom extends PageManager {
         },
         body: JSON.stringify({
           query: `
-            query MyFirstQuery {
+            query graphqlStencil {
               site {
                 products (entityIds: [`+arr+`]) {
                   edges {
