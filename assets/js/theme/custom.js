@@ -116,7 +116,7 @@ export default class Custom extends PageManager {
             <div class="card-description">
             <p class="card-title">Product Description</p>
             <p class="card-text">${stripHtml(product.description)}</p>      
-            <a href="${addToCartURLFormat}${product.entityId}" class="btn btn-primary">Add to cart</a>
+            <a href="${addToCartURLFormat}${product.entityId}" class="btn btn-primary">Buy Now</a>
             </div>
          
         </div>`
